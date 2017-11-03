@@ -1,8 +1,10 @@
 package com.xiong.service.impl;
 
 import com.mmall.common.ServerResponse;
+import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.xiong.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,9 +13,17 @@ import org.springframework.stereotype.Service;
 @Service()
 public class UserServiceImpl implements IUserService {
 
+    @Autowired
+    private UserMapper userMapper;
     @Override
     public ServerResponse<User> login(String name, String password) {
-        return null;
+        User user = userMapper.selectLogin(name, password);
+        if (user == null) {
+            return ServerResponse.createByErrorMessage("密码不正确！");
+        } else {
+
+            return ServerResponse.createBySuccess(user);
+        }
     }
 
     @Override

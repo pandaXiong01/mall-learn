@@ -11,19 +11,6 @@
 
     <context:component-scan base-package="com.mmall" annotation-config="true"/>
 
-    <!--<bean id="propertyConfigurer"-->
-          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="order" value="2"/>-->
-        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--<value>classpath:datasource.properties</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name="fileEncoding" value="utf-8"/>-->
-    <!--</bean>-->
-
-
         <!--引入外部配置文件-->
 
     <context:property-placeholder location="classpath:datasource.properties"/>
@@ -63,8 +50,9 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath*:mappers/*Mapper.xml"></property>
-
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mappers/*.xml"/>
+        <property name="typeAliasesPackage" value="com.mmall.pojo"/>
         <!-- 分页插件 -->
         <property name="plugins">
             <array>
@@ -82,6 +70,7 @@
 
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mmall.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->

@@ -5,6 +5,8 @@ import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Product;
 import com.mmall.vo.ProductDetailVo;
 
+import java.util.List;
+
 /**
  * Created by geely
  */
@@ -24,5 +26,6 @@ public interface IProductService {
 
     ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy);
 
+    ServerResponse<List<Product>> searchProduct(String productName);
 
 }

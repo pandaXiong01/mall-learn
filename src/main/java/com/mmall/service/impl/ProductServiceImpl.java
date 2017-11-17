@@ -232,29 +232,11 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    @Override
+    public ServerResponse<List<Product>> searchProduct(String productName) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return null;
+    }
 
 
 }

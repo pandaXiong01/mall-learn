@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiong.dao.XUserMapper" >
+
+    <resultMap id="userResultMap" type="com.xiong.pojo.XUser">
+        <id property="userId" column="user_id" />
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+        <result property="role" column="role"/>
+        <result property="amount" column="amount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        user_id, user_name, password, email, phone, question, answer, role, create_time, update_time
+    </sql>
+
+
+    <insert id="insert" parameterType="com.xiong.pojo.XUser">
+
+        INSERT INTO xiong_user
+        (user_id,user_name,password,email,phone,question,answer,role,amount,create_time,update_time)
+        VALUES
+        (#{userId}, #{userName}, #{password}, #{email},
+         #{phone}, #{question}, #{answer},
+          #{role}, #{amount}, now(),now())
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiong.pojo.XUser">
+        update mmall_user
+        <set >
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null" >
+                question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null" >
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null" >
+                role = #{role,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = now(),
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+
+    </update>
+
+
+
+    <select id="checkMobile" parameterType="String" resultType="int">
+        SELECT COUNT(1) FROM xiong_user
+        WHERE phone = #{mobile}
+    </select>
+
+    <select id="selectLogin" parameterType="map" resultMap="userResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM xiong_user
+        WHERE phone = #{mobile}
+        AND password = #{password}
+
+    </select>
+
+    <select id="selectUserInfoByPrimaryKey" parameterType="String" resultMap="userResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM xiong_user
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.mmall.common.exceptions;
+package com.xiong.common.exceptions;
 
 /**
  * Created by gonghui on 2017/11/17.

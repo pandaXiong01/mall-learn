@@ -1,6 +1,5 @@
-package com.mmall.common.interceptor;
+package com.xiong.common.interceptor;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
@@ -34,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "user/login");
         } else  {
-            ServerResponse response = ServerResponse.createByErrorMessage("用户未Test登录");
+            ServerResponse response = ServerResponse.createByErrorMessage("用户未登录");
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonResult = objectMapper.writeValueAsString(response);
             httpServletResponse.setCharacterEncoding("UTF-8");

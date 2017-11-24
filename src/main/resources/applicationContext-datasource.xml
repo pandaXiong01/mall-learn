@@ -9,7 +9,7 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.mmall" annotation-config="true"/>
+    <context:component-scan base-package="com" annotation-config="true"/>
 
         <!--引入外部配置文件-->
 
@@ -52,7 +52,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath*:mappers/*.xml"/>
-        <property name="typeAliasesPackage" value="com.mmall.pojo"/>
+        <property name="typeAliasesPackage" value="com.mmall.pojo,com.xiong.pojo"/>
         <!-- 分页插件 -->
         <property name="plugins">
             <array>
@@ -69,7 +69,7 @@
     </bean>
 
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.mmall.dao"/>
+        <property name="basePackage" value="com.mmall.dao, com.xiong.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

@@ -5,9 +5,14 @@ import com.google.common.collect.Lists;
 import com.mmall.common.ServerResponse;
 import com.mmall.service.IProductService;
 import com.mmall.test.TestBase;
+import com.xiong.pojo.XUser;
+import com.xiong.service.UserService;
+import com.xiong.util.UUIDUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.plugin.util.UIUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -16,12 +21,23 @@ import java.util.List;
 public class ProductServiceTest extends TestBase {
 
     @Autowired
-    private IProductService iProductService;
+    private UserService userService;
 
     @Test
-    public void testIProductService(){
-        ServerResponse<PageInfo> result =  iProductService.getProductByKeywordCategory("iphone",2,1,5,"price_desc");
-        System.out.println(result);
+    public void testUserService(){
+
+
+        XUser user = new XUser();
+        user.setAnswer("haa");
+        user.setAmount(new BigDecimal(100));
+        user.setUserName("pandaXiong");
+        user.setPassword("123456");
+        user.setEmail("11@163.com");
+        user.setPhone("1159508433");
+        user.setAnswer("jsopodp");
+        user.setUserId(UUIDUtil.getUUID());
+        userService.register(user);
+
     }
 
     public static void main(String[] args) {

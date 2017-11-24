@@ -5,6 +5,7 @@ import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Shipping;
 import com.mmall.service.impl.ShippingServiceImpl;
 import com.mmall.test.TestBase;
+import com.mmall.util.JSONUtil;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -35,69 +36,15 @@ public class ShippingServiceTest extends TestBase {
     @Test
     public void testList(){
         ServerResponse sr = iShippingService.list(1,1,2);
-        PageInfo<Shipping> p=new PageInfo<Shipping>((List<Shipping>)sr.getData());
-        logger.info(ToStringBuilder.reflectionToString(sr.getData()));
+        PageInfo<Shipping> p=(PageInfo<Shipping>)sr.getData();
+        logger.info("======");
+        logger.info(JSONUtil.toJson(p));
         logger.info("======");
 
-        ServerResponse x = ServerResponse.createBySuccess(p);
-        logger.info(ToStringBuilder.reflectionToString(x));
 
-//        {
-//            "status": 0,
-//                "date": {
-//            "pageNum": 1,
-//                    "pageSize": 2,
-//                    "size": 2,
-//                    "startRow": 1,
-//                    "endRow": 2,
-//                    "total": 8,
-//                    "pages": 4,
-//                    "list": [
-//            {
-//                "id": 3,
-//                    "userId": 1,
-//                    "receiverName": "a",
-//                    "receiverPhone": "0100",
-//                    "receiverMobile": "186",
-//                    "receiverProvince": "北京",
-//                    "receiverCity": "北京",
-//                    "receiverDistrict": "昌平区",
-//                    "receiverAddress": "矩阵小区",
-//                    "receiverZip": "100000",
-//                    "createTime": 1480515824000,
-//                    "updateTime": 1480515824000
-//            },
-//            {
-//                "id": 4,
-//                    "userId": 1,
-//                    "receiverName": "b",
-//                    "receiverPhone": "0100",
-//                    "receiverMobile": "186",
-//                    "receiverProvince": "北京",
-//                    "receiverCity": "北京",
-//                    "receiverDistrict": "昌平区",
-//                    "receiverAddress": "矩阵小区",
-//                    "receiverZip": "100000",
-//                    "createTime": 1480515824000,
-//                    "updateTime": 1480515824000
-//            }
-//            ],
-//            "firstPage": 1,
-//                    "prePage": 0,
-//                    "nextPage": 2,
-//                    "lastPage": 4,
-//                    "isFirstPage": true,
-//                    "isLastPage": false,
-//                    "hasPreviousPage": false,
-//                    "hasNextPage": true,
-//                    "navigatePages": 8,
-//                    "navigatepageNums": [
-//            1,
-//                    2,
-//                    3,
-//                    4
-//            ]
-//        }
-//        }
+
     }
+
+
+
 }

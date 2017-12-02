@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+
+
     @Override
     public void register(XUser user) {
 
@@ -50,5 +52,8 @@ public class UserServiceImpl implements UserService {
         int result = userMapper.insert(user);
     }
 
-
+    @Override
+    public void updateUserInfo(XUser user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 }

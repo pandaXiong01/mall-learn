@@ -3,7 +3,7 @@ package com.xiong.common.interceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
-import com.mmall.pojo.User;
+import com.xiong.pojo.XUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,21 +28,25 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         Boolean loginValidation = true;
-        User user = (User)httpServletRequest.getSession().getAttribute(Const.CURRENT_USER);
-        if (isWebRequest(httpServletRequest)) {
+        XUser user = (XUser)httpServletRequest.getSession().getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            if (isWebRequest(httpServletRequest)) {
 
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "user/login");
-        } else  {
-            ServerResponse response = ServerResponse.createByErrorMessage("用户未登录");
-            ObjectMapper objectMapper = new ObjectMapper();
-            String jsonResult = objectMapper.writeValueAsString(response);
-            httpServletResponse.setCharacterEncoding("UTF-8");
-            httpServletResponse.setContentType("application/json");
-            PrintWriter writer = httpServletResponse.getWriter();
-            writer.write(jsonResult);
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "user/login");
+            } else  {
+                ServerResponse response = ServerResponse.createByErrorMessage("用户未登录");
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonResult = objectMapper.writeValueAsString(response);
+                httpServletResponse.setCharacterEncoding("UTF-8");
+                httpServletResponse.setContentType("application/json");
+                PrintWriter writer = httpServletResponse.getWriter();
+                writer.write(jsonResult);
+            }
+            loginValidation = false;
         }
 
-        return false;
+
+        return loginValidation;
     }
 
     @Override

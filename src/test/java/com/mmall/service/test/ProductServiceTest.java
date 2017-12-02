@@ -1,16 +1,10 @@
 package com.mmall.service.test;
 
-import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
-import com.mmall.common.ServerResponse;
-import com.mmall.service.IProductService;
 import com.mmall.test.TestBase;
-import com.xiong.pojo.XUser;
-import com.xiong.service.UserService;
-import com.xiong.util.UUIDUtil;
+import com.xiong.service.TransactionService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.plugin.util.UIUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,22 +15,14 @@ import java.util.List;
 public class ProductServiceTest extends TestBase {
 
     @Autowired
-    private UserService userService;
+    private TransactionService transactionService;
 
     @Test
     public void testUserService(){
+//        BigDecimal amount = new BigDecimal(500.000);
+//       transactionService.transfer("c62b288b535c4f29a629115e6ce5597a","fd505aa2d0434f31995c87d522672022", amount);
 
-
-        XUser user = new XUser();
-        user.setAnswer("haa");
-        user.setAmount(new BigDecimal(100));
-        user.setUserName("pandaXiong");
-        user.setPassword("123456");
-        user.setEmail("11@163.com");
-        user.setPhone("1159508433");
-        user.setAnswer("jsopodp");
-        user.setUserId(UUIDUtil.getUUID());
-        userService.register(user);
+       transactionService.paySalary("48aafa5467dd4fed83421d8b9ce9a880","","");
 
     }
 

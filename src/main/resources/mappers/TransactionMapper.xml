@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiong.dao.TransactionMapper" >
+
+
+
+    <update id="updateUserAmount" parameterType="map">
+      UPDATE xiong_user
+      SET amount = #{amount}
+      where user_id = #{userId}
+    </update>
+
+    <select id="getUserAmount" parameterType="String" resultType="Decimal">
+      SELECT amount FROM xiong_user WHERE user_id = #{userId}
+    </select>
+
+</mapper>

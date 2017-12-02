@@ -36,9 +36,38 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping("loginOut")
+    @ResponseBody
+    public void loginOut(HttpSession session) {
+        session.removeAttribute(Const.CURRENT_USER);
+
+    }
+
     @RequestMapping("register")
     @ResponseBody
     public void register(XUser user) {
         userService.register(user);
+    }
+
+    @RequestMapping("getUserInfo")
+    @ResponseBody
+    public XUser getUserInfo(HttpSession session) {
+
+        XUser user = (XUser)session.getAttribute(Const.CURRENT_USER);
+        return user;
+
+    }
+
+    @RequestMapping("updateUserInfo")
+    @ResponseBody
+    public void updateUserInfo(XUser newUser, HttpSession session) {
+        XUser user = (XUser)session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            throw new ValidationException("用户未登录",-99);
+        }
+
+        newUser.setUserId(user.getUserId());
+        userService.updateUserInfo(newUser);
+
     }
 }

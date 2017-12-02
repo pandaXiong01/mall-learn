@@ -6,6 +6,25 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+
+    <!-- 指定Spring配置文件的位置 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:applicationContext.xml
+        </param-value>
+    </context-param>
+
+
+    <!-- 配置Web应用启动时候加载Spring容器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!--配置全局编码 UTF-8 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -24,27 +43,11 @@
     </filter-mapping>
 
 
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
-    <!--</listener>-->
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:applicationContext.xml
-        </param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>

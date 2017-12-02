@@ -9,4 +9,7 @@ public interface UserService {
     XUser login(String mobile, String password);
 
     void register(XUser user);
+
+    void updateUserInfo(XUser user);
+
 }

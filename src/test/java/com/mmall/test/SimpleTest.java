@@ -4,12 +4,21 @@ import com.xiong.common.exceptions.ValidationException;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
  * Created by gonghui on 2017/11/17.
  */
 public class SimpleTest {
+
+    @Test
+    public void testBigDe() {
+        BigDecimal amount = new BigDecimal(500.000);
+        int result = amount.compareTo(BigDecimal.ZERO);
+        System.out.printf("hahah" + result);
+    }
+
 
     @Test
     public void testUUID () {

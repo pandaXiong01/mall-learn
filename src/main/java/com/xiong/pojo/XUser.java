@@ -22,8 +22,17 @@ public class XUser {
     private String answer;
     private Integer role;
     private BigDecimal amount;
+    private String imageUrl;
     private Date createTime;
     private Date updateTime;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Date getCreateTime() {
         return createTime;

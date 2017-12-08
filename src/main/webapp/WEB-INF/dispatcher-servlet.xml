@@ -30,6 +30,14 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+
+    <mvc:resources mapping="/**" location="/" order="1"/>
+<!--能访问jsp 不能访问HTML文件-->
+    <!--<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>-->
+    <!--<mvc:resources mapping="/page/**" location="/page/" cache-period="31556926"/>-->
+    <!--<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>-->
+    <!--<mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>-->
+
     <mvc:interceptors>
 
         <mvc:interceptor>

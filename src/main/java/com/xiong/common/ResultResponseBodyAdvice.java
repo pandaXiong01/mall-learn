@@ -38,62 +38,63 @@ public class ResultResponseBodyAdvice implements ResponseBodyAdvice<Object>{
     /**
      * 过滤是否是json的数据
      */
-    public boolean supports(MethodParameter methodParameter,
-                            Class<? extends HttpMessageConverter<?>> aClass) {
-        Boolean isRest = AnnotationUtils.isAnnotationDeclaredLocally(
-                RestController.class, methodParameter.getContainingClass());
-        ResponseBody responseBody = AnnotationUtils.findAnnotation(
-                methodParameter.getMethod(), ResponseBody.class);
-        if (isRest || responseBody != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-//    public boolean supports(MethodParameter methodParameter, Class aClass) {
-//
+//    public boolean supports(MethodParameter methodParameter,
+//                            Class<? extends HttpMessageConverter<?>> aClass) {
 //        Boolean isRest = AnnotationUtils.isAnnotationDeclaredLocally(
 //                RestController.class, methodParameter.getContainingClass());
 //        ResponseBody responseBody = AnnotationUtils.findAnnotation(
-//                methodParameter.getMethod(), ResponseBody.class); //得到方法上的注解
+//                methodParameter.getMethod(), ResponseBody.class);
 //        if (isRest || responseBody != null) {
 //            return true;
 //        } else {
 //            return false;
 //        }
-//
 //    }
+
+    public boolean supports(MethodParameter methodParameter, Class aClass) {
+
+        Boolean isRest = AnnotationUtils.isAnnotationDeclaredLocally(
+                RestController.class, methodParameter.getContainingClass());
+        ResponseBody responseBody = AnnotationUtils.findAnnotation(
+                methodParameter.getMethod(), ResponseBody.class); //得到方法上的注解
+        if (isRest || responseBody != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     /**
      * 修改返回的数据
      */
-//    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-//        if (o instanceof Result) {
-//            return o;
-//        }
-//        Result result = Result.getInstance();
-//        o = o==null?"":o;
-//        result.setResult(o);
-//        return result;
-//
-//    }
-
     @Override
-    public Object beforeBodyWrite(Object o, MethodParameter methodParameter,
-                                  MediaType mediaType,
-
-                                  Class<? extends HttpMessageConverter<?>> aClass,
-                                  ServerHttpRequest serverHttpRequest,
-                                  ServerHttpResponse serverHttpResponse) {
-        if (!(o instanceof Result)) {
-            Result result = Result.getInstance();
-            o=o==null?"":o;
-            result.setResult(o);
-            o = result;
+    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        if (o instanceof Result) {
+            return o;
         }
-        return o;
+        Result result = Result.getInstance();
+        o = o==null?"":o;
+        result.setResult(o);
+        return result;
+
     }
+
+//    @Override
+//    public Object beforeBodyWrite(Object o, MethodParameter methodParameter,
+//                                  MediaType mediaType,
+//
+//                                  Class<? extends HttpMessageConverter<?>> aClass,
+//                                  ServerHttpRequest serverHttpRequest,
+//                                  ServerHttpResponse serverHttpResponse) {
+//        if (!(o instanceof Result)) {
+//            Result result = Result.getInstance();
+//            o=o==null?"":o;
+//            result.setResult(o);
+//            o = result;
+//        }
+//        return o;
+//    }
 
 
 
